@@ -1,0 +1,31 @@
+import 'package:bookia/core/styles/app_colors.dart';
+import 'package:bookia/core/styles/text_styles.dart';
+import 'package:flutter/material.dart';
+
+
+class MainButton extends StatelessWidget {
+  final String? title;
+  final Function()? onTap;
+  final Color bgcolor;
+  final Color textcolor;
+  final Color? bordercolor;
+  const MainButton({super.key, required this.title, this.onTap, this.bordercolor,  this.bgcolor=AppColors.primaryColor,  this.textcolor=AppColors.backgroundColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        minimumSize: Size(double.infinity, 56),
+        backgroundColor: bgcolor,
+         side: bordercolor!=null? BorderSide(color: bordercolor!):null,
+      ),
+      child: Text(
+        title ?? "",
+        style: TextStyles.title.copyWith(color: textcolor,decoration: TextDecoration.none,),
+        
+      ),
+    );
+  }
+}
