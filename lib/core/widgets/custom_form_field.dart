@@ -3,17 +3,19 @@ import 'package:bookia/core/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomFormField extends StatelessWidget {
- 
   final int? keyboardtype;
   final bool? maxlines;
   final String? hintText;
   final String? Function(String?)? validator;
+  final TextEditingController? controller;
   const CustomFormField({
     super.key,
 
     this.keyboardtype,
-    this.maxlines, this.validator, required this.hintText,
-
+    this.maxlines,
+    this.validator,
+    required this.hintText,
+    this.controller,
   });
 
   @override
@@ -21,9 +23,8 @@ class CustomFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         TextFormField(
-          
+          controller: controller,
           validator: validator,
           keyboardType: keyboardtype == 1
               ? TextInputType.emailAddress
@@ -32,14 +33,12 @@ class CustomFormField extends StatelessWidget {
               : TextInputType.text,
           minLines: maxlines == false ? 3 : 1,
           maxLines: maxlines == false ? null : 1,
-              
+
           decoration: InputDecoration(
-            hint:Text(
-          hintText ?? "",
-          style: TextStyles.caption1.copyWith(color: AppColors.greycolor),
-        ) ,
-            
-            
+            hint: Text(
+              hintText ?? "",
+              style: TextStyles.caption1.copyWith(color: AppColors.greycolor),
+            ),
           ),
         ),
       ],

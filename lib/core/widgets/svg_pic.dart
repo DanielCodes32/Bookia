@@ -10,8 +10,8 @@ class SvgPic extends StatelessWidget {
   const SvgPic({
     super.key,
     required this.assetName,
-     this.width,
-     this.height,
+    this.width,
+    this.height,
     this.color,
   });
 

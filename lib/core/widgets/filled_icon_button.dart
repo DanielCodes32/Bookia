@@ -1,8 +1,6 @@
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
-
 class FilledIconButton extends StatelessWidget {
   final Color? fillcolor;
   final Widget iconData;
@@ -19,15 +17,11 @@ class FilledIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: fillcolor ?? AppColors.backgroundColor,
-      shape: const CircleBorder(), 
+      shape: const CircleBorder(),
       child: InkWell(
         onTap: onPressed,
         customBorder: const CircleBorder(),
-        child: SizedBox(
-          width: 40, 
-          height: 40,
-          child: Center(child: iconData),
-        ),
+        child: SizedBox(width: 40, height: 40, child: Center(child: iconData)),
       ),
     );
   }

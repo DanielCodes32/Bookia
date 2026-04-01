@@ -33,14 +33,27 @@ abstract class AppThemes {
       onSurface: AppColors.blackColor,
       seedColor: AppColors.primaryColor,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: AppColors.lightgrey1,
+      backgroundColor: Colors.transparent,
+      selectedLabelStyle: TextStyles.caption2.copyWith(
+        fontWeight: FontWeight.w600,
+        height: 2,
+      ),
+      unselectedLabelStyle: TextStyles.caption2.copyWith(
+        fontWeight: FontWeight.w600,
+        height: 2,
+      ),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       elevation: 0,
-      backgroundColor: Colors.white,
     ),
     dividerColor: AppColors.lightgrey1,
   );
   static ThemeData get darktheme => ThemeData(
-     dividerColor: AppColors.lightgrey1,
+    dividerColor: AppColors.lightgrey1,
     cardColor: AppColors.blackColor,
     fontFamily: AppFonts.DmSerif,
     scaffoldBackgroundColor: Colors.transparent,
@@ -67,9 +80,22 @@ abstract class AppThemes {
       ),
     ),
 
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: AppColors.lightgrey1,
+      backgroundColor: Colors.transparent,
+      selectedLabelStyle: TextStyles.caption2.copyWith(
+        fontWeight: FontWeight.w600,
+        height: 2,
+      ),
+      unselectedLabelStyle: TextStyles.caption2.copyWith(
+        fontWeight: FontWeight.w600,
+        height: 2,
+      ),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       elevation: 0,
-      backgroundColor: Colors.white,
     ),
     datePickerTheme: DatePickerThemeData(
       backgroundColor: AppColors.blackColor,
