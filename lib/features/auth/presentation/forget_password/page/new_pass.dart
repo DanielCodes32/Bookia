@@ -21,7 +21,7 @@ class NewPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<AuthCubit>();
-    String pass='';
+    String pass = '';
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
@@ -40,70 +40,74 @@ class NewPassword extends StatelessWidget {
           );
         }
       },
-      child:Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: GestureDetector(
-          onTap: () {
-            pop(context);
-          },
-          child: SvgPic(assetName: AppAssets.back, width: 41, height: 41),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: GestureDetector(
+            onTap: () {
+              pop(context);
+            },
+            child: SvgPic(assetName: AppAssets.back, width: 41, height: 41),
+          ),
         ),
-      ),
-      body: MyBodyView(
-        padding: const EdgeInsets.all(22),
-        child: SingleChildScrollView(
-          child: Form(
-            key: cubit.formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Create new password", style: TextStyles.headline),
-                Gap(10),
-                Text(
-                  "Your new password must be unique from those previously used.",
-                  style: TextStyles.caption1,
-                ),
-                Gap(32),
-                CustomPassField(hintText: 'New Password',controller: cubit.passwordController,validator: (value){
-                  if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          } else if (!isPasswordValid(value)) {
-                            return 'Please enter a valid password';
-                          }
-                          pass = value;
-                          return null;
-                        },
-                ),
-                Gap(15),
-                CustomPassField(hintText: 'Confirm Password',controller: cubit.passwordconfirmationController,validator: (value) {
-                  if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          } else if (!isPasswordValid(value)) {
-                            return 'Please enter a valid password';
-                          }
-                          else if (pass != value) {
-                            return 'Passwords do not match';
-                          }
-                          return null;
-                        },
-                  
-                ),
-                Gap(38),
-                MainButton(
-                  title: 'Reset Password',
-                  onTap: () {
-                    if (cubit.formKey.currentState!.validate()) {
-                      cubit.resetpass();
-                    }
-                  },
-                ),
-              ],
+        body: MyBodyView(
+          padding: const EdgeInsets.all(22),
+          child: SingleChildScrollView(
+            child: Form(
+              key: cubit.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Create new password", style: TextStyles.headline),
+                  Gap(10),
+                  Text(
+                    "Your new password must be unique from those previously used.",
+                    style: TextStyles.caption1,
+                  ),
+                  Gap(32),
+                  CustomPassField(
+                    hintText: 'New Password',
+                    controller: cubit.passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      } else if (!isPasswordValid(value)) {
+                        return 'Please enter a valid password';
+                      }
+                      pass = value;
+                      return null;
+                    },
+                  ),
+                  Gap(15),
+                  CustomPassField(
+                    hintText: 'Confirm Password',
+                    controller: cubit.passwordconfirmationController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      } else if (!isPasswordValid(value)) {
+                        return 'Please enter a valid password';
+                      } else if (pass != value) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                  ),
+                  Gap(38),
+                  MainButton(
+                    title: 'Reset Password',
+                    onTap: () {
+                      if (cubit.formKey.currentState!.validate()) {
+                        cubit.resetpass();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    )
     );
   }
 }

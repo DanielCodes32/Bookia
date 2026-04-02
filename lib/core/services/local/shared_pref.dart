@@ -34,6 +34,7 @@ class SharedPref {
   static String gettoken() {
     return pref.getString(ktoken) ?? "";
   }
+
   static Future<void> saveotp(String? otp) async {
     if (otp == null) return;
     await pref.setString(kotp, otp);

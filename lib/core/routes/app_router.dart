@@ -6,6 +6,8 @@ import 'package:bookia/features/auth/presentation/forget_password/page/new_pass.
 import 'package:bookia/features/auth/presentation/forget_password/page/success.dart';
 import 'package:bookia/features/auth/presentation/login_register/login/page/login_screen.dart';
 import 'package:bookia/features/auth/presentation/login_register/login/page/register_screen.dart';
+import 'package:bookia/features/details/presentation/page/details_screen.dart';
+import 'package:bookia/features/home/models/best_seller_response/product.dart';
 import 'package:bookia/features/main/main_app_screen.dart';
 import 'package:bookia/features/splash/splash.dart';
 import 'package:bookia/features/welcome/welcome.dart';
@@ -18,6 +20,12 @@ class AppRouter {
       GoRoute(
         path: Routes.splash,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: Routes.details,
+        builder: (context, state) => DetailsScreen(
+          book: state.extra as Product,
+        ),
       ),
       GoRoute(
         path: Routes.welcome,
@@ -41,22 +49,22 @@ class AppRouter {
           child: const RegisterScreen(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.forgetpassword,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),
           child: const ForgetPassword(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.verification,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),
           child: const VerficationScreen(),
         ),
       ),
-     
-       GoRoute(
+
+      GoRoute(
         path: Routes.newpass,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),

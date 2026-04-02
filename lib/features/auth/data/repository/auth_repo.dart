@@ -50,75 +50,70 @@ class AuthRepo {
       return null;
     }
   }
- static Future<ForgetPass?> forgetPass( Forgetparams params) async {
-  try {
-    var response = await DioProvider.post(
-      endpoint: Apis.forgetPass,
-      data: params.toJson(),
-    );
 
-    if (response.statusCode == 200) {
-      return ForgetPass.fromJson(response.data);
-    } else if (response.statusCode == 422) {
-    
-      return null;
-    }  else if   (response.statusCode == 500) {
-    
-      return null;
-    } 
-    else {
-      log('Unexpected status code: ${response.statusCode}');
+  static Future<ForgetPass?> forgetPass(Forgetparams params) async {
+    try {
+      var response = await DioProvider.post(
+        endpoint: Apis.forgetPass,
+        data: params.toJson(),
+      );
+
+      if (response.statusCode == 200) {
+        return ForgetPass.fromJson(response.data);
+      } else if (response.statusCode == 422) {
+        return null;
+      } else if (response.statusCode == 500) {
+        return null;
+      } else {
+        log('Unexpected status code: ${response.statusCode}');
+        return null;
+      }
+    } on Exception catch (err) {
+      log(err.toString());
       return null;
     }
-  } on Exception catch (err) {
-    log(err.toString());
-    return null;
   }
-}
 
-static Future<ForgetPass?> verfiy( Forgetparams params) async {
-  try {
-    var response = await DioProvider.post(
-      endpoint: Apis.checkforgetpassword,
-      data: params.toJson(),
-    );
+  static Future<ForgetPass?> verfiy(Forgetparams params) async {
+    try {
+      var response = await DioProvider.post(
+        endpoint: Apis.checkforgetpassword,
+        data: params.toJson(),
+      );
 
-    if (response.statusCode == 200) {
-  
-      SharedPref.saveotp(params.otp);
-      return ForgetPass.fromJson(response.data);
-    } else if (response.statusCode == 422) {
-    
+      if (response.statusCode == 200) {
+        SharedPref.saveotp(params.otp);
+        return ForgetPass.fromJson(response.data);
+      } else if (response.statusCode == 422) {
+        return null;
+      } else {
+        log('Unexpected status code: ${response.statusCode}');
+        return null;
+      }
+    } on Exception catch (err) {
+      log(err.toString());
       return null;
     }
-     else {
-      log('Unexpected status code: ${response.statusCode}');
-      return null;
-    }
-  } on Exception catch (err) {
-    log(err.toString());
-    return null;
   }
-}
-static Future<ForgetPass?> resetpass( Forgetparams params) async {
-  try {
-    var response = await DioProvider.post(
-      endpoint: Apis.resetpassword,
-      data: params.toJson(),
-    );
 
-    if (response.statusCode == 200) {
-      return ForgetPass.fromJson(response.data);
-    } else if (response.statusCode == 422) {
+  static Future<ForgetPass?> resetpass(Forgetparams params) async {
+    try {
+      var response = await DioProvider.post(
+        endpoint: Apis.resetpassword,
+        data: params.toJson(),
+      );
+
+      if (response.statusCode == 200) {
+        return ForgetPass.fromJson(response.data);
+      } else if (response.statusCode == 422) {
+        return null;
+      } else {
+        log('Unexpected status code: ${response.statusCode}');
+        return null;
+      }
+    } on Exception catch (err) {
+      log(err.toString());
       return null;
     }
-     else {
-      log('Unexpected status code: ${response.statusCode}');
-      return null;
-    }
-  } on Exception catch (err) {
-    log(err.toString());
-    return null;
   }
-}
 }

@@ -8,4 +8,5 @@ class Routes {
   static const String newpass = '/newpass';
   static const String passchanged = '/passchanged';
   static const String mainappscreen = '/mainappscreen';
+  static const String details = '/details';
 }
