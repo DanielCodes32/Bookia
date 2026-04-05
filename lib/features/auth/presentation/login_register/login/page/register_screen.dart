@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/custom_snake_bar.dart';
 import 'package:bookia/core/functions/navigations.dart';

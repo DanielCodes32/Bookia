@@ -4,7 +4,12 @@ class Forgetparams {
   final String? otp;
   final String? passwordconfirmation;
 
-  Forgetparams({this.email, this.password, this.otp, this.passwordconfirmation});
+  Forgetparams({
+    this.email,
+    this.password,
+    this.otp,
+    this.passwordconfirmation,
+  });
   Map<String, dynamic> toJson() {
     return {
       "otp": otp,

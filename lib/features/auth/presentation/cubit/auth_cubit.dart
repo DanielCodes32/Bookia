@@ -35,7 +35,6 @@ class AuthCubit extends Cubit<AuthState> {
       email: emailController.text,
       password: passwordController.text,
       passwordconfirmation: passwordconfirmationController.text,
-      
     );
     var data = await AuthRepo.register(params);
     if (data != null) {
@@ -44,11 +43,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthErrorState());
     }
   }
-   Future<void> forgetpass() async {
+
+  Future<void> forgetpass() async {
     emit(AuthLoadingState());
-    var params = Forgetparams(
-      email: emailController.text,
-     );
+    var params = Forgetparams(email: emailController.text);
     var data = await AuthRepo.forgetPass(params);
     if (data == null) {
       emit(AuthSuccessState());
@@ -56,12 +54,13 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthErrorState());
     }
   }
-   Future<void> verfiy() async {
+
+  Future<void> verfiy() async {
     emit(AuthLoadingState());
     var params = Forgetparams(
-      otp:otpController.text,
+      otp: otpController.text,
       email: emailController.text,
-     );
+    );
     var data = await AuthRepo.verfiy(params);
     if (data == null) {
       emit(AuthSuccessState());
@@ -69,13 +68,14 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthErrorState());
     }
   }
+
   Future<void> resetpass() async {
     emit(AuthLoadingState());
     var params = Forgetparams(
       otp: SharedPref.getotp(),
       password: passwordController.text,
       passwordconfirmation: passwordconfirmationController.text,
-     );
+    );
     var data = await AuthRepo.resetpass(params);
     if (data == null) {
       emit(AuthSuccessState());

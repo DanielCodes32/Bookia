@@ -2,9 +2,7 @@ import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/widgets/mybodyview.dart';
 import 'package:bookia/core/widgets/svg_pic.dart';
 import 'package:bookia/features/home/presentation/widgets/home_slider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

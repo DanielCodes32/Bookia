@@ -41,22 +41,22 @@ class AppRouter {
           child: const RegisterScreen(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.forgetpassword,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),
           child: const ForgetPassword(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.verification,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),
           child: const VerficationScreen(),
         ),
       ),
-     
-       GoRoute(
+
+      GoRoute(
         path: Routes.newpass,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),

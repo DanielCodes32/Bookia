@@ -1,5 +1,4 @@
 import 'package:bookia/core/constants/app_assets.dart';
-import 'package:bookia/core/routes/app_router.dart';
 import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
