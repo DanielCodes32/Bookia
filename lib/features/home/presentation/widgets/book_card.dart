@@ -27,7 +27,7 @@ class BookCard extends StatelessWidget {
           color: AppColors.secondaryColor,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          
           children: [
             Expanded(
               child: Hero(

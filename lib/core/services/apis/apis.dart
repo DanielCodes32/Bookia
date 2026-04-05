@@ -7,4 +7,5 @@ class Apis {
   static const String resetpassword = "reset-password";
   static const String sliders = "sliders";
   static const String bestseller = "products-bestseller";
+   static const String search = "products-search";
 }

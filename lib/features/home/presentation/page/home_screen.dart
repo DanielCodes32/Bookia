@@ -1,4 +1,6 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/mybodyview.dart';
@@ -20,7 +22,9 @@ class HomeScreen extends StatelessWidget {
         title: Image.asset(AppAssets.splash, height: 30, width: 100),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              pushTo(context, Routes.search);
+            },
             icon: SvgPic(assetName: AppAssets.search),
           ),
         ],

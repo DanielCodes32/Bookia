@@ -1,6 +1,8 @@
+import 'package:bookia/features/home/models/best_seller_response/product.dart';
+
 import 'links.dart';
 import 'meta.dart';
-import 'product.dart';
+
 
 class Data {
   List<Product>? products;
