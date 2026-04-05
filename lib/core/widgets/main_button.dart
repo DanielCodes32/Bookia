@@ -8,13 +8,14 @@ class MainButton extends StatelessWidget {
   final Color bgcolor;
   final Color textcolor;
   final Color? bordercolor;
+  final Size? size;
   const MainButton({
     super.key,
     required this.title,
     this.onTap,
     this.bordercolor,
     this.bgcolor = AppColors.primaryColor,
-    this.textcolor = AppColors.backgroundColor,
+    this.textcolor = AppColors.backgroundColor, this.size,
   });
 
   @override
@@ -23,7 +24,7 @@ class MainButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        minimumSize: Size(double.infinity, 56),
+        minimumSize: size ?? const Size(double.infinity, 50),
         backgroundColor: bgcolor,
         side: bordercolor != null ? BorderSide(color: bordercolor!) : null,
       ),

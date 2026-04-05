@@ -1,8 +1,13 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/styles/app_colors.dart';
+import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/mybodyview.dart';
 import 'package:bookia/core/widgets/svg_pic.dart';
+import 'package:bookia/features/home/presentation/widgets/best_seller.dart';
 import 'package:bookia/features/home/presentation/widgets/home_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +25,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: MyBodyView(child: Column(children: [HomeSlider()])),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [HomeSlider(), BestSeller()],
+        ),
+      ),
     );
   }
 }

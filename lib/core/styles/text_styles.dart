@@ -8,7 +8,7 @@ class TextStyles {
     fontFamily: AppFonts.DmSerif,
   );
 
-  static TextStyle title = TextStyle(fontSize: 20);
+  static TextStyle title = TextStyle(fontSize: 22);
 
   static TextStyle caption1 = TextStyle(
     fontSize: 15,

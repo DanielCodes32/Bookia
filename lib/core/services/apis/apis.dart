@@ -5,4 +5,6 @@ class Apis {
   static const String forgetPass = "forget-password";
   static const String checkforgetpassword = "check-forget-password";
   static const String resetpassword = "reset-password";
+  static const String sliders = "sliders";
+  static const String bestseller = "products-bestseller";
 }
