@@ -5,6 +5,7 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/svg_pic.dart';
+import 'package:bookia/features/details/presentation/widgets/addtowishlist/wishlist_action.dart';
 import 'package:bookia/features/home/models/best_seller_response/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,8 @@ class DetailsScreen extends StatelessWidget {
           child: SvgPic(assetName: AppAssets.back),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPic(assetName: AppAssets.bookmark),
+          WishlistAction(
+            productId: book.id??0,
           ),
         ],
       ),
@@ -43,15 +43,13 @@ class DetailsScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
-                  
                     width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.height*0.5,
-                      imageUrl: book.image ?? "",
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                             BookCardShimmer(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    imageUrl: book.image ?? "",
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => BookCardShimmer(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
               Gap(11),
@@ -70,16 +68,21 @@ class DetailsScreen extends StatelessWidget {
               ),
               Gap(16),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                  vertical: 0,
+                ),
                 child: ReadMoreText(
-                  book.description ?? "",trimMode: TrimMode.Line,
-                  style: TextStyles.caption2.copyWith(color: AppColors.darkgreycolor),
+                  book.description ?? "",
+                  trimMode: TrimMode.Line,
+                  style: TextStyles.caption2.copyWith(
+                    color: AppColors.darkgreycolor,
+                  ),
                   textAlign: TextAlign.justify,
                   trimLines: 4,
                   colorClickableText: AppColors.primaryColor,
                   trimCollapsedText: 'Show more',
                   trimExpandedText: 'Show less',
-                  
                 ),
               ),
             ],

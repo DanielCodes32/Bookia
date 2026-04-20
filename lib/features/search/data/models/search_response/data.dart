@@ -3,7 +3,6 @@ import 'package:bookia/features/home/models/best_seller_response/product.dart';
 import 'links.dart';
 import 'meta.dart';
 
-
 class Data {
   List<Product>? products;
   Meta? meta;

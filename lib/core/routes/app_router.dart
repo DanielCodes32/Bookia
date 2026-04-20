@@ -25,9 +25,8 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.details,
-        builder: (context, state) => DetailsScreen(
-          book: state.extra as Product,
-        ),
+        builder: (context, state) =>
+            DetailsScreen(book: state.extra as Product),
       ),
       GoRoute(
         path: Routes.welcome,
@@ -73,14 +72,14 @@ class AppRouter {
           child: const NewPassword(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.newpass,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthCubit(),
           child: const NewPassword(),
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.search,
         builder: (context, state) => BlocProvider(
           create: (context) => SearchCubit()..search(''),

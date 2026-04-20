@@ -9,25 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({super.key, required this.book});
+  const BookCard({
+    super.key,
+    required this.book,
+    
+    this.onRemove,
+     this.onRefresh,
+  });
 
   final Product book;
-
+ 
+  final VoidCallback? onRemove;
+final VoidCallback? onRefresh;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushTo(context, Routes.details, extra: book);
+        pushTo(context, Routes.details, extra: book).then((value) {
+          onRefresh?.call();
+        });
       },
       child: Container(
         padding: const EdgeInsets.all(10),
-
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: AppColors.secondaryColor,
         ),
         child: Column(
-          
           children: [
             Expanded(
               child: Hero(
@@ -37,8 +45,7 @@ class BookCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: book.image ?? "",
                     progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                           BookCardShimmer(),
+                        (context, url, downloadProgress) => BookCardShimmer(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
@@ -56,30 +63,40 @@ class BookCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$${book.price ?? ""}",
+                  "\$${book.priceAfterDiscount ?? book.price}",
                   style: TextStyles.caption1.copyWith(
                     color: AppColors.blackColor,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 23,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
+                if (onRemove != null)
+                  GestureDetector(
+                    onTap: onRemove,
+                    child: Icon(
+                      Icons.close,
                       color: AppColors.blackColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      size: 20,
                     ),
-                    child: Text(
-                      "Buy",
-                      style: TextStyles.caption2.copyWith(
-                        color: AppColors.backgroundColor,
+                  )
+                else
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 23,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.blackColor,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Text(
+                        "Buy",
+                        style: TextStyles.caption2.copyWith(
+                          color: AppColors.backgroundColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ],

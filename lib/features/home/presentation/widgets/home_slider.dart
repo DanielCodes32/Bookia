@@ -20,66 +20,64 @@ class _HomeSliderState extends State<HomeSlider> {
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
-  
     return BlocBuilder<HomeCubit, HomeState>(
-      builder: ( context, state) {
-          var sliders=context.read<HomeCubit>().sliders;
-         if (state is! HomeSuccessState) {
-           return ShimmerWidget(
-             child: Container(
-               height: 180,
-               margin: const EdgeInsets.symmetric(horizontal: 20),
-               decoration: BoxDecoration(
-                 color: AppColors.backgroundColor,
-                 borderRadius: BorderRadius.circular(10),
-               ),
-             ),
-           );
-         }
-      
-      return Column(
-        children: [
-          CarouselSlider.builder(
-            options: CarouselOptions(
+      builder: (context, state) {
+        var sliders = context.read<HomeCubit>().sliders;
+        if (state is! HomeSuccessState) {
+          return ShimmerWidget(
+            child: Container(
               height: 180,
-              // aspectRatio: 16/9,
-              viewportFraction: 0.9,
-      
-              autoPlay: true,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-              onPageChanged: (int index, CarouselPageChangedReason reason) {
-                setState(() {
-                  activeIndex = index;
-                });
-              },
-              scrollDirection: Axis.horizontal,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: AppColors.backgroundColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-            itemCount: sliders.length,
-            itemBuilder:
-                (BuildContext context, int itemIndex, int pageViewIndex) =>
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        sliders[itemIndex].image??"",
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+          );
+        }
+
+        return Column(
+          children: [
+            CarouselSlider.builder(
+              options: CarouselOptions(
+                height: 180,
+                // aspectRatio: 16/9,
+                viewportFraction: 0.9,
+
+                autoPlay: true,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.3,
+                onPageChanged: (int index, CarouselPageChangedReason reason) {
+                  setState(() {
+                    activeIndex = index;
+                  });
+                },
+                scrollDirection: Axis.horizontal,
+              ),
+              itemCount: sliders.length,
+              itemBuilder:
+                  (BuildContext context, int itemIndex, int pageViewIndex) =>
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          sliders[itemIndex].image ?? "",
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-          ),
-          Gap(10),
-          AnimatedSmoothIndicator(
-            activeIndex: activeIndex,
-            count: sliders.length,
-            effect: ScrollingDotsEffect(
-              dotHeight: 9,
-              dotWidth: 9,
-              activeDotColor: AppColors.primaryColor,
             ),
-          ),
-        ],
-      );
-        
+            Gap(10),
+            AnimatedSmoothIndicator(
+              activeIndex: activeIndex,
+              count: sliders.length,
+              effect: ScrollingDotsEffect(
+                dotHeight: 9,
+                dotWidth: 9,
+                activeDotColor: AppColors.primaryColor,
+              ),
+            ),
+          ],
+        );
       },
     );
   }

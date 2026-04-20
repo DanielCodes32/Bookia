@@ -15,7 +15,8 @@ class MainButton extends StatelessWidget {
     this.onTap,
     this.bordercolor,
     this.bgcolor = AppColors.primaryColor,
-    this.textcolor = AppColors.backgroundColor, this.size,
+    this.textcolor = AppColors.backgroundColor,
+    this.size,
   });
 
   @override

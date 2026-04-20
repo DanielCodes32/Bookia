@@ -8,8 +8,18 @@ class SharedPref {
   static const ktoken = "token";
   static const kuser = "user";
   static const kotp = "otp";
+  static const kfavourite = "favourite";
+
   static Future<void> init() async {
     pref = await SharedPreferences.getInstance();
+  }
+
+  static Future<void> saveWishlist(List<String> ids) async {
+    await pref.setStringList(kfavourite, ids);
+  }
+
+  static List<String> getWishlist() {
+    return pref.getStringList(kfavourite) ?? [];
   }
 
   static Future<void> saveuserinfo(User? user) async {

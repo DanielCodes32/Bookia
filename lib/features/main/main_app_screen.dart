@@ -4,6 +4,8 @@ import 'package:bookia/core/widgets/svg_pic.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/cubit/home_state.dart';
 import 'package:bookia/features/home/presentation/page/home_screen.dart';
+import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
+import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,9 +21,18 @@ class MainAppScreen extends StatefulWidget {
 class _MainAppScreenState extends State<MainAppScreen> {
   int selectedIndex = 0;
   final List<Widget> screens = [
-     Center(child: BlocProvider(create: (context) => HomeCubit()..getInitData(), 
-    child: HomeScreen())),
-    const Center(child: Text("bookmark")),
+    Center(
+      child: BlocProvider(
+        create: (context) => HomeCubit()..getInitData(),
+        child: HomeScreen(),
+      ),
+    ),
+     Center(
+      child: BlocProvider(
+        create: (context) => WishlistCubit()..getWishlist(),
+      child: WishlistScreen(),
+    ),
+      ),
     const Center(child: Text("category")),
     const Center(child: Text("profile")),
   ];

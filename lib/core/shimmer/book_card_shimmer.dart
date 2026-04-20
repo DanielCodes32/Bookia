@@ -26,11 +26,7 @@ class BookCardShimmer extends StatelessWidget {
             ),
           ),
           Gap(5),
-          Container(
-            width: 100,
-            height: 12,
-            color: AppColors.backgroundColor,
-          ),
+          Container(width: 100, height: 12, color: AppColors.backgroundColor),
           Gap(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

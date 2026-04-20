@@ -26,7 +26,7 @@ class VerficationScreen extends StatelessWidget {
           pushTo(context, Routes.newpass);
         }
         if (state is AuthErrorState) {
-          errordiag(context, "Something went wrong please try again");
+          mydiag(context, "Something went wrong please try again",Colors.red);
 
           pop(context);
         }
@@ -83,9 +83,9 @@ class VerficationScreen extends StatelessWidget {
                   title: 'Verify',
                   onTap: () {
                     if (cubit.otpController.text.isEmpty) {
-                      errordiag(context, "Please enter OTP");
+                      mydiag(context, "Please enter OTP",Colors.red);
                     } else if (cubit.otpController.text.length < 6) {
-                      errordiag(context, "Please enter valid OTP");
+                      mydiag(context, "Please enter valid OTP",Colors.red);
                     } else {
                       cubit.verfiy();
                     }

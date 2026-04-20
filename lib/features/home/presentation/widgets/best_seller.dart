@@ -15,44 +15,41 @@ class BestSeller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
-      builder: (BuildContext context, state) { 
-       var books=context.read<HomeCubit>().bestsellers;
-         if (state is! HomeSuccessState) {
-           return const MyBodyView(
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 GridShimmer(shimmerWidget: BookCardShimmer()),
-               ],
-             ),
-           );
-         }
-      return MyBodyView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Best Sellers", style: TextStyles.title),
-            Gap(15),
-            GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.65,
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) { 
-                var book =books[index];
-                return BookCard(book: book);
-                
-              },
-              itemCount: books.length,
+      builder: (BuildContext context, state) {
+        var books = context.read<HomeCubit>().bestsellers;
+        if (state is! HomeSuccessState) {
+          return const MyBodyView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [GridShimmer(shimmerWidget: BookCardShimmer())],
             ),
-          ],
-        ),
-      );
-      }
+          );
+        }
+        return MyBodyView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Best Sellers", style: TextStyles.title),
+              Gap(15),
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 0.65,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  var book = books[index];
+                  return BookCard(book: book);
+                },
+                itemCount: books.length,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
