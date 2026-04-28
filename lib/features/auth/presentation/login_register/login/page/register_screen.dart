@@ -29,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
           pushToBase(context, Routes.mainappscreen);
         }
         if (state is AuthErrorState) {
-          mydiag(context, "Something went wrong please try again",Colors.red);
+          mydiag(context, "Something went wrong please try again", Colors.red);
 
           pop(context);
         }

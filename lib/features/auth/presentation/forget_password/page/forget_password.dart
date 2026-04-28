@@ -28,7 +28,7 @@ class ForgetPassword extends StatelessWidget {
           pushTo(context, Routes.verification);
         }
         if (state is AuthErrorState) {
-          mydiag(context, "Something went wrong please try again",Colors.red);
+          mydiag(context, "Something went wrong please try again", Colors.red);
 
           pop(context);
         }

@@ -1,4 +1,3 @@
-
 import 'package:bookia/core/shimmer/book_card_shimmer.dart';
 import 'package:bookia/core/shimmer/grid_shimmer.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -19,10 +18,7 @@ class WishlistScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
-          "Wishlist",
-          style: TextStyles.title,
-        ),
+        title: Text("Wishlist", style: TextStyles.title),
       ),
       body: BlocBuilder<WishlistCubit, WishlistState>(
         builder: (context, state) {
@@ -33,9 +29,9 @@ class WishlistScreen extends StatelessWidget {
           }
 
           var books = context.read<WishlistCubit>().wishlist;
-          
+
           if (books.isEmpty && state is WishlistSuccessState) {
-             return Center(child: Text("No items in wishlist"));
+            return Center(child: Text("No items in wishlist"));
           }
 
           return MyBodyView(
@@ -57,9 +53,9 @@ class WishlistScreen extends StatelessWidget {
                       return BookCard(
                         book: book,
                         onRemove: () {
-                          context
-                              .read<WishlistCubit>()
-                              .removeFromWishlist(book.id!);
+                          context.read<WishlistCubit>().removeFromWishlist(
+                            book.id!,
+                          );
                         },
                         onRefresh: () {
                           context.read<WishlistCubit>().getWishlist();

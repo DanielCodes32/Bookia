@@ -12,15 +12,15 @@ class BookCard extends StatelessWidget {
   const BookCard({
     super.key,
     required this.book,
-    
+
     this.onRemove,
-     this.onRefresh,
+    this.onRefresh,
   });
 
   final Product book;
- 
+
   final VoidCallback? onRemove;
-final VoidCallback? onRefresh;
+  final VoidCallback? onRefresh;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,10 +30,11 @@ final VoidCallback? onRefresh;
         });
       },
       child: Container(
+      
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.secondaryColor,
+          color: AppColors.backgroundColor,
         ),
         child: Column(
           children: [
@@ -47,6 +48,7 @@ final VoidCallback? onRefresh;
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => BookCardShimmer(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

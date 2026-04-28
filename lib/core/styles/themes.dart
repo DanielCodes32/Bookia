@@ -7,10 +7,10 @@ import 'package:flutter/services.dart';
 abstract class AppThemes {
   static ThemeData get lightTheme => ThemeData(
     fontFamily: AppFonts.DmSerif,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.containercolor,
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.containercolor,
       elevation: 0,
     ),
     datePickerTheme: DatePickerThemeData(

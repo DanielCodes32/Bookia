@@ -5,6 +5,7 @@ import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/svg_pic.dart';
+import 'package:bookia/features/details/presentation/widgets/add_to_cart/add_to_cart.dart';
 import 'package:bookia/features/details/presentation/widgets/addtowishlist/wishlist_action.dart';
 import 'package:bookia/features/home/models/best_seller_response/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,11 +28,7 @@ class DetailsScreen extends StatelessWidget {
           },
           child: SvgPic(assetName: AppAssets.back),
         ),
-        actions: [
-          WishlistAction(
-            productId: book.id??0,
-          ),
-        ],
+        actions: [WishlistAction(productId: book.id ?? 0)],
       ),
       body: SingleChildScrollView(
         child: Align(
@@ -49,6 +46,7 @@ class DetailsScreen extends StatelessWidget {
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => BookCardShimmer(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -93,13 +91,7 @@ class DetailsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text("\$${book.price}", style: TextStyles.title),
-          MainButton(
-            title: "Add To Cart",
-            size: Size(212, 56),
-            bgcolor: AppColors.blackColor,
-            textcolor: AppColors.backgroundColor,
-            onTap: () {},
-          ),
+          AddToCart(productId: book.id ?? 0),
         ],
       ),
     );

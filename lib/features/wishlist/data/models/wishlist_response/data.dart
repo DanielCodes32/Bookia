@@ -1,6 +1,5 @@
 import 'package:bookia/features/home/models/best_seller_response/product.dart';
 
-
 import 'link.dart';
 
 class Data {

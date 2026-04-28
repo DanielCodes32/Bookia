@@ -68,8 +68,9 @@ class WishlistRepo {
 
   static void _cacheWishlistIds(WishlistResponse? response) {
     if (response?.data?.data != null) {
-      List<String> ids =
-          response!.data!.data!.map((e) => e.id.toString()).toList();
+      List<String> ids = response!.data!.data!
+          .map((e) => e.id.toString())
+          .toList();
       print("Caching wishlist IDs: $ids");
       SharedPref.saveWishlist(ids);
     }

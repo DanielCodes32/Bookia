@@ -9,22 +9,22 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        routerConfig: AppRouter.routes,
-        debugShowCheckedModeBanner: false,
-        theme: AppThemes.lightTheme,
-        darkTheme: AppThemes.darktheme,
-        themeMode: ThemeMode.light,
-        builder: (context, child) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: SafeArea(
-              top: false,
-              bottom: Platform.isAndroid,
-              maintainBottomViewPadding: true,
-              child: child!,
-            ),
-          );
-        },
+      routerConfig: AppRouter.routes,
+      debugShowCheckedModeBanner: false,
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darktheme,
+      themeMode: ThemeMode.light,
+      builder: (context, child) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isAndroid,
+            maintainBottomViewPadding: true,
+            child: child!,
+          ),
+        );
+      },
     );
   }
 }

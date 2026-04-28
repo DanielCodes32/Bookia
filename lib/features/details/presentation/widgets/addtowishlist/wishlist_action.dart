@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WishlistAction extends StatelessWidget {
-  const WishlistAction({
-    super.key,
-    required this.productId,
-  });
+  const WishlistAction({super.key, required this.productId});
 
   final int productId;
 
@@ -48,7 +45,12 @@ class WishlistAction extends StatelessWidget {
                 cubit.addToWishlist(productId);
               }
             },
-            icon: SvgPic(assetName: AppAssets.bookmark,color: cubit.isProductInWishlist(productId) ? AppColors.primaryColor : null,),
+            icon: SvgPic(
+              assetName: AppAssets.bookmark,
+              color: cubit.isProductInWishlist(productId)
+                  ? AppColors.primaryColor
+                  : null,
+            ),
           );
         },
       ),
