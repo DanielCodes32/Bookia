@@ -30,7 +30,6 @@ class BookCard extends StatelessWidget {
         });
       },
       child: Container(
-      
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

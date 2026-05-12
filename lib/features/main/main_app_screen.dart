@@ -34,10 +34,12 @@ class _MainAppScreenState extends State<MainAppScreen> {
         child: WishlistScreen(),
       ),
     ),
-     Center(child:   BlocProvider(
+    Center(
+      child: BlocProvider(
         create: (context) => CartCubit()..getcart(),
         child: CartScreen(),
-      ),),
+      ),
+    ),
     const Center(child: Text("profile")),
   ];
   @override

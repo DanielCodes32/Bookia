@@ -1,3 +1,18 @@
+double? _toDouble(dynamic value) {
+  if (value == null) return null;
+  if (value is num) return value.toDouble();
+  if (value is String) return double.tryParse(value);
+  return null;
+}
+
+int? _toInt(dynamic value) {
+  if (value == null) return null;
+  if (value is int) return value;
+  if (value is num) return value.toInt();
+  if (value is String) return int.tryParse(value);
+  return null;
+}
+
 class CartItem {
   int? itemId;
   int? itemProductId;
@@ -24,17 +39,18 @@ class CartItem {
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
-    itemId: json['item_id'] as int?,
-    itemProductId: json['item_product_id'] as int?,
+    itemId: _toInt(json['item_id']),
+    itemProductId: _toInt(json['item_product_id']),
     itemProductName: json['item_product_name'] as String?,
     itemProductImage: json['item_product_image'] as String?,
-    itemProductPrice: json['item_product_price'] as String?,
-    itemProductDiscount: json['item_product_discount'] as int?,
-    itemProductPriceAfterDiscount:
-        (json['item_product_price_after_discount'] as num?)?.toDouble(),
-    itemProductStock: json['item_product_stock'] as int?,
-    itemQuantity: json['item_quantity'] as int?,
-    itemTotal: (json['item_total'] as num?)?.toDouble(),
+    itemProductPrice: json['item_product_price']?.toString(),
+    itemProductDiscount: _toInt(json['item_product_discount']),
+    itemProductPriceAfterDiscount: _toDouble(
+      json['item_product_price_after_discount'],
+    ),
+    itemProductStock: _toInt(json['item_product_stock']),
+    itemQuantity: _toInt(json['item_quantity']),
+    itemTotal: _toDouble(json['item_total']),
   );
 
   Map<String, dynamic> toJson() => {

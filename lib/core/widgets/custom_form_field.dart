@@ -8,6 +8,9 @@ class CustomFormField extends StatelessWidget {
   final String? hintText;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final bool? readOnly;
+  final Widget? suffixIcon;
+  final void Function()? onTap;
   const CustomFormField({
     super.key,
 
@@ -16,6 +19,9 @@ class CustomFormField extends StatelessWidget {
     this.validator,
     required this.hintText,
     this.controller,
+    this.readOnly,
+    this.suffixIcon,
+    this.onTap,
   });
 
   @override
@@ -24,6 +30,8 @@ class CustomFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          onTap: onTap,
+          readOnly: readOnly ?? false,
           controller: controller,
           validator: validator,
           keyboardType: keyboardtype == 1
@@ -35,6 +43,7 @@ class CustomFormField extends StatelessWidget {
           maxLines: maxlines == false ? null : 1,
 
           decoration: InputDecoration(
+            suffixIcon: suffixIcon,
             hint: Text(
               hintText ?? "",
               style: TextStyles.caption1.copyWith(color: AppColors.greycolor),

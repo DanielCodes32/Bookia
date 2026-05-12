@@ -15,4 +15,3 @@ class AddToCartErrorState extends AddToCartState {
 
   AddToCartErrorState({required this.error});
 }
-

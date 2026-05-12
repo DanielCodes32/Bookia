@@ -1,5 +1,7 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/custom_snake_bar.dart';
+import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/shimmer/list_shimmer.dart';
 import 'package:bookia/core/styles/app_colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
@@ -19,7 +21,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( backgroundColor: AppColors.containercolor,
+    return Scaffold(
+      backgroundColor: AppColors.containercolor,
       appBar: AppBar(
         backgroundColor: AppColors.containercolor,
         automaticallyImplyLeading: false,
@@ -27,69 +30,130 @@ class CartScreen extends StatelessWidget {
         title: Text("My Cart", style: TextStyles.title),
       ),
       body: BlocBuilder<CartCubit, CartState>(
+        buildWhen: (previous, current) =>
+            current is CartLoadedstate ||
+            current is CartErrorstate ||
+            current is CartLoadingstate,
+
         builder: (context, state) {
           var cubit = context.read<CartCubit>();
           var cartItems = cubit.cartItems;
-        if (state is CartLoadedstate) {
-        if (cartItems.isEmpty) {
-          return Center(child:Column(mainAxisAlignment: MainAxisAlignment.center, children: [SvgPic(assetName: AppAssets.category, width: 100,height: 100,),Gap(15), Text("No items in cart", style: TextStyles.title) ]));
-        }
-        return ListView.separated(
-          padding: const EdgeInsets.all(20),
-        
-          itemBuilder: (BuildContext context, int index) {
-            
-            var book=cartItems[index];
-            return CartCard(book: book, onDelete: () { cubit.removeFromCart(book.itemId??0); },onDecrement: () {
-             if((book.itemQuantity??0)>1) cubit.updateCart(book.itemId??0, (book.itemQuantity??0)-1);
-            else {
-              cubit.removeFromCart(book.itemId??0);
+          if (state is CartLoadedstate) {
+            if (cartItems.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPic(
+                      assetName: AppAssets.category,
+                      width: 100,
+                      height: 100,
+                    ),
+                    Gap(15),
+                    Text("No items in cart", style: TextStyles.title),
+                  ],
+                ),
+              );
             }
-            },
-            onIncrement: () {
-              if((book.itemQuantity??0)<(book.itemProductStock??0)){
-              cubit.updateCart(book.itemId??0, (book.itemQuantity??0)+1);
-              }
-              else  {
-                mydiag(context, "You can't add more than stock", Colors.red); 
-               }
-            },
+            return ListView.separated(
+              padding: const EdgeInsets.all(20),
+
+              itemBuilder: (BuildContext context, int index) {
+                var book = cartItems[index];
+                return CartCard(
+                  book: book,
+                  onDelete: () {
+                    cubit.removeFromCart(book.itemId ?? 0);
+                  },
+                  onDecrement: () {
+                    if ((book.itemQuantity ?? 0) > 1) {
+                      cubit.updateCart(
+                        book.itemId ?? 0,
+                        (book.itemQuantity ?? 0) - 1,
+                      );
+                    } else {
+                      cubit.removeFromCart(book.itemId ?? 0);
+                    }
+                  },
+                  onIncrement: () {
+                    if ((book.itemQuantity ?? 0) <
+                        (book.itemProductStock ?? 0)) {
+                      cubit.updateCart(
+                        book.itemId ?? 0,
+                        (book.itemQuantity ?? 0) + 1,
+                      );
+                    } else {
+                      mydiag(
+                        context,
+                        "You can't add more than stock",
+                        Colors.red,
+                      );
+                    }
+                  },
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Gap(16);
+              },
+              itemCount: cartItems.length,
             );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Gap(16);
-          },
-          itemCount: cartItems.length,
-        );
-        }
-        else  {
-            return Padding(padding: const EdgeInsets.all(20), child: ListShimmer(itemCount: 5, scrollDirection: Axis.vertical));
-            
+          } else {
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListShimmer(itemCount: 5, scrollDirection: Axis.vertical),
+            );
           }
-        }
-        
+        },
       ),
-   bottomNavigationBar: BlocBuilder<CartCubit, CartState>(
-     builder: (context, state) {
-       
-     
-     return Padding(
-       padding: const EdgeInsets.all(15),
-       child: Column(mainAxisSize: MainAxisSize.min,
-        children: [
-          Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Total", style: TextStyles.title.copyWith(color: AppColors.darkgreycolor),),
-              Text(context.read<CartCubit>().total ?? "", style: TextStyles.title.copyWith(color: AppColors.darkgreycolor),),
-             ],
-          ),
-          MainButton(title: "Checkout", onTap: () {},)
-        ],
-        
-       ),
-     );
-     }
-   ),
+
+      bottomNavigationBar: BlocConsumer<CartCubit, CartState>(
+        listener: (context, state) {
+          if (state is CheckoutSuccessstate) {
+            pushTo(
+              context,
+              Routes.placeorder,
+              extra: context.read<CartCubit>().total,
+            );
+          } else if (state is CheckoutErrorstate) {
+            mydiag(context, state.message, Colors.red);
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total",
+                      style: TextStyles.title.copyWith(
+                        color: AppColors.darkgreycolor,
+                      ),
+                    ),
+                    Text(
+                      context.read<CartCubit>().total ?? "",
+                      style: TextStyles.title.copyWith(
+                        color: AppColors.darkgreycolor,
+                      ),
+                    ),
+                  ],
+                ),
+                state is CheckoutLoadingstate
+                    ? const Center(child: CircularProgressIndicator())
+                    : MainButton(
+                        title: "Checkout",
+                        onTap: () {
+                          context.read<CartCubit>().checkout();
+                        },
+                      ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

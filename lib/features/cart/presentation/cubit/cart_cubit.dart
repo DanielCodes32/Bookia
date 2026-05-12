@@ -1,4 +1,5 @@
 import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
+import 'package:bookia/features/cart/data/models/govs_response/datum.dart';
 import 'package:bookia/features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitialstate());
   String? total;
   List<CartItem> cartItems = [];
+  List<Datum> governorates = [];
 
   Future<void> getcart() async {
     emit(CartLoadingstate());
@@ -46,20 +48,43 @@ class CartCubit extends Cubit<CartState> {
   Future<void> updateCart(int cartItemId, int quantity) async {
     var item = cartItems.firstWhere((element) => element.itemId == cartItemId);
     item.itemQuantity = quantity;
-    double? oldtotal = item.itemTotal??0.0;
+    double? oldtotal = item.itemTotal ?? 0.0;
     double? newtotal = quantity * (item.itemProductPriceAfterDiscount ?? 0.0);
-     item.itemTotal = newtotal;
-     if (total != null) {
-      total = ((double.tryParse(total ?? '0') ?? 0.0 - oldtotal + newtotal))
-          .toString();}
+    item.itemTotal = newtotal;
+    if (total != null) {
+      total = ((double.tryParse(total ?? '0') ?? 0.0) - oldtotal + newtotal)
+          .toString();
+    }
     emit(CartLoadedstate());
     var data = await CartRepo.updateCart(cartItemId, quantity);
     if (data != null) {
-      emit(CartLoadedstate());
-      total = data.data!.total.toString();
+      total = data.data?.total?.toString() ?? "0";
       cartItems = data.data?.cartItems ?? [];
+      emit(CartLoadedstate());
     } else {
       emit(CartErrorstate("Something went wrong"));
+    }
+  }
+
+  Future<void> checkout() async {
+    emit(CheckoutLoadingstate());
+    var data = await CartRepo.checkout();
+    if (data != null) {
+      total = data.data?.total?.toString() ?? "0";
+      emit(CheckoutSuccessstate());
+    } else {
+      emit(CheckoutErrorstate("Checkout failed. Please try again."));
+    }
+  }
+
+  Future<void> getGovernorates() async {
+    emit(GetGovernoratesLoadingstate());
+    var data = await CartRepo.getGovernorates();
+    if (data != null) {
+      governorates = data.data ?? [];
+      emit(GetGovernoratesLoadedstate());
+    } else {
+      emit(GetGovernoratesErrorstate("Something went wrong"));
     }
   }
 }
