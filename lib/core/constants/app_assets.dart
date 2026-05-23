@@ -12,4 +12,5 @@ class AppAssets {
   static const String search = 'assets/icons/search.svg';
   static const String successmark = 'assets/images/Successmark.png';
   static const String bookmark = 'assets/icons/Bookmark.svg';
+  static const String camera = 'assets/icons/camera.svg';
 }

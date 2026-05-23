@@ -17,4 +17,6 @@ class Apis {
   static const String updatecart = "update-cart";
   static const String checkout = "checkout";
   static const String governorates = "governorates";
+  static const String placeorder = "place-order";
+  static const String updateProfile = "update-profile";
 }

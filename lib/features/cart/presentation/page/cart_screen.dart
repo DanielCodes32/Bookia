@@ -119,6 +119,9 @@ class CartScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          if (context.read<CartCubit>().cartItems.isEmpty) {
+            return const SizedBox.shrink();
+          }
           return Padding(
             padding: const EdgeInsets.all(15),
             child: Column(

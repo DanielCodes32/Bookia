@@ -4,7 +4,7 @@ import 'package:bookia/core/services/apis/apis.dart';
 import 'package:bookia/core/services/apis/dio_provider.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/features/cart/data/models/cart_response/cart_response.dart';
-import 'package:bookia/features/cart/data/models/govs_response/govs_response.dart';
+import 'package:bookia/features/checkout/data/models/govs_response/govs_response.dart';
 
 class CartRepo {
   static Future<CartResponse?> getcart() async {
@@ -86,22 +86,6 @@ class CartRepo {
     try {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return CartResponse.fromJson(response.data);
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
-  }
-
-  static Future<GovsResponse?> getGovernorates() async {
-    var response = await DioProvider.get(
-      endpoint: Apis.governorates,
-    );
-    try {
-      if (response.statusCode == 200) {
-        return GovsResponse.fromJson(response.data);
       } else {
         return null;
       }

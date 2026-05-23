@@ -21,12 +21,3 @@ class CheckoutErrorstate extends CartState {
   final String message;
   CheckoutErrorstate(this.message);
 }
-
-class GetGovernoratesLoadingstate extends CartState {}
-
-class GetGovernoratesLoadedstate extends CartState {}
-
-class GetGovernoratesErrorstate extends CartState {
-  final String message;
-  GetGovernoratesErrorstate(this.message);
-}

@@ -5,14 +5,15 @@ import 'package:bookia/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bookia/features/cart/presentation/page/cart_screen.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/page/home_screen.dart';
+import 'package:bookia/features/profile/presentation/page/profile_screen.dart';
 import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key});
-
+  const MainAppScreen({super.key, this.currentIndex});
+  final int? currentIndex;
   @override
   State<StatefulWidget> createState() {
     return _MainAppScreenState();
@@ -20,6 +21,22 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.currentIndex ?? 0;
+  }
+
+  @override
+  void didUpdateWidget(MainAppScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.currentIndex != null && widget.currentIndex != selectedIndex) {
+      setState(() {
+        selectedIndex = widget.currentIndex!;
+      });
+    }
+  }
+
   int selectedIndex = 0;
   final List<Widget> screens = [
     Center(
@@ -40,7 +57,12 @@ class _MainAppScreenState extends State<MainAppScreen> {
         child: CartScreen(),
       ),
     ),
-    const Center(child: Text("profile")),
+    Center(
+      child: BlocProvider(
+        create: (context) => CartCubit()..getcart(),
+        child: ProfileScreen(),
+      ),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

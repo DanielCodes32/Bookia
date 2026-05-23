@@ -29,7 +29,7 @@ class SharedPref {
     await pref.setString(kuser, jsonToString);
   }
 
-  static User? getuserinfo(User user) {
+  static User? getuserinfo() {
     var cachedString = pref.getString(kuser);
     if (cachedString == null) return null;
     var stringToJson = json.decode(cachedString);

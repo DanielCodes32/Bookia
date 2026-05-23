@@ -1,5 +1,5 @@
 import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
-import 'package:bookia/features/cart/data/models/govs_response/datum.dart';
+import 'package:bookia/features/checkout/data/models/govs_response/datum.dart';
 import 'package:bookia/features/cart/data/repo/cart_repo.dart';
 import 'package:bookia/features/cart/presentation/cubit/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,17 +74,6 @@ class CartCubit extends Cubit<CartState> {
       emit(CheckoutSuccessstate());
     } else {
       emit(CheckoutErrorstate("Checkout failed. Please try again."));
-    }
-  }
-
-  Future<void> getGovernorates() async {
-    emit(GetGovernoratesLoadingstate());
-    var data = await CartRepo.getGovernorates();
-    if (data != null) {
-      governorates = data.data ?? [];
-      emit(GetGovernoratesLoadedstate());
-    } else {
-      emit(GetGovernoratesErrorstate("Something went wrong"));
     }
   }
 }

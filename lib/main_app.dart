@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bookia/core/routes/app_router.dart';
 import 'package:bookia/core/styles/themes.dart';
+import 'package:chili_debug_view/chili_debug_view.dart';
 import 'package:flutter/material.dart';
 
 class MainApp extends StatelessWidget {
@@ -15,14 +16,18 @@ class MainApp extends StatelessWidget {
       darkTheme: AppThemes.darktheme,
       themeMode: ThemeMode.light,
       builder: (context, child) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SafeArea(
-            top: false,
-            bottom: Platform.isAndroid,
-            maintainBottomViewPadding: true,
-            child: child!,
+        return DebugView(
+          app: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: SafeArea(
+              top: false,
+              bottom: Platform.isAndroid,
+              maintainBottomViewPadding: true,
+              child: child!,
+            ),
           ),
+          navigatorKey: navigatorKey,
+          showDebugViewButton: true,
         );
       },
     );

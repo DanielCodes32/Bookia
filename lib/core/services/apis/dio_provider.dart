@@ -1,8 +1,10 @@
 import 'package:bookia/core/services/apis/apis.dart';
+import 'package:chili_debug_view/chili_debug_view.dart';
 import 'package:dio/dio.dart';
 
 class DioProvider {
   static late Dio dio;
+
   static void init() {
     dio = Dio(
       BaseOptions(
@@ -12,6 +14,7 @@ class DioProvider {
         receiveTimeout: const Duration(seconds: 10),
       ),
     );
+    dio.interceptors.addAll([NetworkLoggerInterceptor()]);
   }
 
   static Future<Response<dynamic>> post({
