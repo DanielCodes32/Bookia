@@ -20,6 +20,16 @@ Bookia is a modern, feature-rich mobile application built with Flutter, designed
 |:---:|:---:|:---:|:---:|
 | ![Home](image/home.png) | ![Search](image/search.png) | ![Wishlist](image/wishlist.png) | ![Item](image/card.png) |
 
+### 🛒 Shopping & Orders
+| Cart | Place Order | Order Success |
+|:---:|:---:|:---:|
+| ![Cart](image/Cart.png) | ![Place Order](image/place%20order.png) | ![Order Success](image/success%20copy.png) |
+
+### 👤 Profile & Account
+| Profile | Edit Profile |
+|:---:|:---:|
+| ![Profile](image/profile%20(2).png) | ![Edit Profile](image/profile%20edit.png) |
+
 ---
 
 ## ✨ Key Features
@@ -43,6 +53,15 @@ Bookia is a modern, feature-rich mobile application built with Flutter, designed
 *   **Personal Collection**: Keep track of books you want to read.
 *   **Offline Support**: Seamless local caching using **SharedPreferences** and **Hive** ensures your wishlist is accessible even without internet.
 *   **Dynamic Sync**: Real-time synchronization between the UI and local storage.
+
+### 🛒 Shopping Cart & Orders
+*   **Cart Management**: Add books to your cart and manage quantities with ease.
+*   **Smooth Checkout**: Streamlined place-order flow with a clear order summary.
+*   **Order Confirmation**: Delightful success screen upon order completion.
+
+### 👤 User Profile
+*   **Profile Overview**: View your account details and activity at a glance.
+*   **Edit Profile**: Update personal information with a clean, intuitive edit screen.
 
 ---
 
