@@ -1,4 +1,5 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/functions/extentions.dart';
 import 'package:bookia/core/functions/navigations.dart';
 import 'package:bookia/core/shimmer/book_card_shimmer.dart';
 import 'package:bookia/core/styles/app_colors.dart';
@@ -26,7 +27,7 @@ class DetailsScreen extends StatelessWidget {
           onTap: () {
             pop(context);
           },
-          child: SvgPic(assetName: AppAssets.back),
+          child:  context.isArabic ? RotatedBox( quarterTurns: 2, child: SvgPic(assetName: AppAssets.back),) : SvgPic(assetName: AppAssets.back)
         ),
         actions: [WishlistAction(productId: book.id ?? 0)],
       ),
